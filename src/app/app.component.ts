@@ -15,5 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.user$ = this.store.select<User>('user');
   }
-
+  onLogout() {
+console.log('log out :::::')
+  }
 }

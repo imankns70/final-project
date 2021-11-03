@@ -1,0 +1,10 @@
+<h2>به سیستم خوش آمدید</h2>
+<ng-container>
+    <div *ngIf="(user$ | async) as user">
+        <h1>{{user | json}}</h1>
+    </div>
+</ng-container>
+<div class="wrapper">
+
+    <router-outlet></router-outlet>
+</div>

@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
  
     return next.handle(request).pipe(
       tap((event: any) => {
-        debugger;
+       
         if (event instanceof HttpResponse) {
 
           console.log('success');

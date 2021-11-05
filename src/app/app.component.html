@@ -1,11 +1,33 @@
-<h2>به سیستم خوش آمدید</h2>
-<!-- <ng-container>
+<ng-container *ngIf="(user$ | async) as user">
+    <h2>{{user.email}}به سیستم خوش آمدید</h2>
+
+    <!-- <ng-container>
     <div *ngIf="(user$ | async) as user">
         <h1>{{user | json}}</h1>
     </div>
 </ng-container> -->
-<app-header [user]="user$ | async" (logOut)="onLogout()"></app-header>
-<app-nav *ngIf="(user$ |async)?.authenticated"></app-nav>
+    <app-header [user]="user" (logOut)="onLogout()"></app-header>
+    <app-nav></app-nav>
+
+</ng-container>
+<!-- method one : -->
+
+
+
+
+<!-- <ng-template *ngIf="!(user$ | async) then gologin"></ng-template>
+
+<ng-template #gologin>
+    <a  routerLink="auth/login" routerLinkActive="active">Log in</a>
+</ng-template> -->
+
+
+
+<!-- method two : -->
+<!-- <ng-template [ngIf]="!(user$ | async)">
+    <a routerLink="auth/login" routerLinkActive="active">Log in</a>
+</ng-template> -->
+
 <div class="wrapper">
 
     <router-outlet></router-outlet>

@@ -1,15 +1,12 @@
 <div class="app-header">
 
   <div class="wrapper">
-    <img src="/img/logo.svg">
+    <img src="/assets/img/logo.svg">
     <div class="app-header__user-info"
     *ngIf="user?.authenticated">
       <span (click)="logOutUser()">
 
       </span>
-    </div>
-    <a routerLink="schedule" routerLinkActive="active">Schedule</a>
-    <a routerLink="meals" routerLinkActive="active">Meals</a>
-    <a routerLink="workoutes" routerLinkActive="active">Workoutes</a>
+    </div>     
   </div>
 </div>

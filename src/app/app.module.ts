@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
  
 import { AuthModule } from './auth/auth.module';
+import {HealthModule} from './health/health.module';
+
 import {HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './error-interceptor';
 
@@ -12,7 +14,9 @@ import { Store } from './store';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 
-export const ROUTES: Routes = [];
+export const ROUTES: Routes = [
+  {path:'', pathMatch:'full', redirectTo:'schedule'}
+];
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ export const ROUTES: Routes = [];
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     AuthModule,
+    HealthModule
   
   ],
  providers:[

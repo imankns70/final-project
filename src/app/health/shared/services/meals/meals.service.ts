@@ -23,8 +23,8 @@ export class MealsService {
 
     return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
       map((apiResult: ApiResult) => apiResult.data),
-      map((meals: Meal[]) => meals),
-      tap((meals: Meal[]) => this.store.set('meals', meals))
+      map((meals: Meal[]) => meals)
+      
     )
   }
   get userId() {

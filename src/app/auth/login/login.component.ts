@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
   loginuser(event: FormGroup) {
-
+debugger
     const { email, password } = event.value;
     this.subscription.add(
     this.authService.loginUser(email, password).subscribe((data: ApiResult) => {

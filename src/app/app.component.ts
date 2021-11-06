@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-
+ 
     this.user$ = this.store.select<User>('user');
 
     const userLoggedin = this.authService.getUserLoggein();

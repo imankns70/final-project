@@ -9,6 +9,7 @@
       new meal
     </a>
   </div>
+ 
   <div *ngIf="meals$ | async as meals; else loading;">
     <div class="message" *ngIf="!meals.length">
       <img src="/assets/img/face.svg">

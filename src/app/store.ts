@@ -18,20 +18,20 @@ const state: State = {
 export class Store {
 
   private subject = new BehaviorSubject<State>(state);
-  private store = this.subject.asObservable().pipe(
-    distinctUntilChanged());
+  private store = this.subject.asObservable();
 
   get value() {
     return this.subject.value;
   }
 
   select<T>(name: string): Observable<T> {
-    debugger
-    return this.store.pipe(pluck(name));
+   
+    return this.store.pipe(
+   pluck(name));
   }
 
   set(name: string, state: any) {
-    debugger
+   
     this.subject.next({ ...this.value, [name]: state });
   }
 

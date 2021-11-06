@@ -3,26 +3,31 @@ import { Store } from 'src/app/store';
 import { Observable, Subscription } from 'rxjs';
 import { MealsService } from '../../../shared/services/meals/meals.service';
 import { Meal } from 'src/app/models/Meal';
+import { ApiResult } from 'src/app/api-result';
 @Component({
   selector: 'app-meals',
   templateUrl: './meals.component.html',
   styleUrls: ['./meals.component.scss']
 })
 export class MealsComponent implements OnInit, OnDestroy {
-  private subscription = new Subscription();
   meals$: Observable<Meal[]>;
+  subscription = new Subscription();
+  errorMessage: string;
   constructor(
     private store: Store,
     private mealsService: MealsService
   ) { }
 
   ngOnInit() {
-
     this.meals$ = this.store.select<Meal[]>('meals');
-    this.subscription = this.mealsService.getMeals().subscribe()
+
+    this.subscription = this.mealsService.getMeals().subscribe((meals: Meal[]) => {
+      this.store.set('meals', meals)
+    })
 
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+ 
 }

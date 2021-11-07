@@ -8,11 +8,21 @@ import { Meal } from 'src/app/models/Meal';
 })
 export class ListItemComponent implements OnInit {
 
+  toggled = false;
   @Input()
-  item:any
+  item: any
   constructor() { }
 
   ngOnInit() {
+ 
   }
+  getRoute(item: any) {
+    return [`../meals`, item.id];
+  }
+  removeItem() {
 
+  }
+  toggle() {
+    this.toggled = !this.toggled
+  }
 }

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { Store } from 'src/app/store';
 import { MealsService } from './services/meals/meals.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ListItemComponent } from './components/list-item/list-item/list-item.component';
 
 @NgModule({
 
@@ -14,8 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
         HttpClientModule,
         RouterModule,
     ],
-    declarations: []
-
+    declarations: [
+        ListItemComponent
+    ],
+    exports: [ListItemComponent]
 })
 
 

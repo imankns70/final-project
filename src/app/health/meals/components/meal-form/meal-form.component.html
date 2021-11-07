@@ -4,6 +4,9 @@
       <label>
         <h3>Meal name</h3>
         <input type="text" placeholder="persin breakfast" formControlName="name" />
+        <div class="error" *ngIf="required">
+          meal name is required
+        </div>
       </label>
     </div>
     <div class="meal-form__food">
@@ -14,8 +17,8 @@
           Add food
         </button>
       </div>
-      <div formArrayName="ingrediants">
-        <label *ngFor="let c of ingrediants.controls; index as i;">
+      <div formArrayName="ingredients">
+        <label *ngFor="let c of ingredients.controls; index as i;">
           <!-- <label *ngFor="let c of ingrediants.controls; let index=i;"> -->
           <input [formControlName]="i" placeholder="e.g eggs">
           <span class="meal-form__remove" (click)="removeIngrediants(i)"></span>

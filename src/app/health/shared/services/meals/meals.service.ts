@@ -24,10 +24,15 @@ export class MealsService {
     return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
       map((apiResult: ApiResult) => apiResult.data),
       map((meals: Meal[]) => meals)
-      
+
     )
   }
   get userId() {
     return this.authService.getUserLoggein().id
+  }
+  addMeal(meal: Meal): Observable<ApiResult> {
+    const viewModel = { ...meal, userId: this.userId };
+    return this.http.post<ApiResult>(`${this.baseUrl}`, viewModel)
+
   }
 }

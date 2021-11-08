@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Meal } from 'src/app/models/Meal';
 
 @Component({
@@ -9,18 +9,23 @@ import { Meal } from 'src/app/models/Meal';
 export class ListItemComponent implements OnInit {
 
   toggled = false;
+
   @Input()
-  item: any
+  item: any;
+
+    @Output()
+  remove = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
- 
+
   }
-  getRoute(item: any) {
-    return [`../meals`, item.id];
+  getRoute() {
+    return [`../meals`, this.item.id];
   }
   removeItem() {
 
+    this.remove.emit(this.item);
   }
   toggle() {
     this.toggled = !this.toggled

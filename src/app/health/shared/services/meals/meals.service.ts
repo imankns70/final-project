@@ -35,4 +35,7 @@ export class MealsService {
     return this.http.post<ApiResult>(`${this.baseUrl}`, viewModel)
 
   }
+  removeMeal(meal: Meal) {
+    return this.http.delete<ApiResult>(`${this.baseUrl}/${meal.id}`)
+  }
 }

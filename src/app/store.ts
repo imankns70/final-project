@@ -25,13 +25,13 @@ export class Store {
   }
 
   select<T>(name: string): Observable<T> {
-   
+ 
     return this.store.pipe(
    pluck(name));
   }
 
   set(name: string, state: any) {
- ;
+   
     this.subject.next({ ...this.value, [name]: state });
   }
    

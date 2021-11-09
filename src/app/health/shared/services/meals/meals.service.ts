@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../../../../auth/shared/services/auth/auth.service';
 import { Store } from 'src/app/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ApiResult } from 'src/app/api-result';
 import { environment } from 'src/environments/environment';
 import { Meal } from 'src/app/models/Meal';
@@ -19,19 +19,25 @@ export class MealsService {
     private authService: AuthService,
   ) { }
 
-  getMeal(mealId?: number): Observable<Meal> {
-
-    return this.store.select<Meal[]>('meals').pipe(
-      filter(Boolean),
-      map((meals: Meal[]) => meals.find(meal => meal.id == mealId))
-    )
+  // getMeal(mealId: number): Observable<Meal> {
+  //  debugger
+  //   return this.store.select<Meal[]>('meals').pipe(
+  //     filter(Boolean),
+  //     tap(meal=>{
+  //       debugger
+  //       console.log(meal)
+  //     } ),
+      
+  //     map((meals: Meal[]) => meals.find(meal => meal.id ==  mealId))
+   
+  //   )
 
     
-  }
+  // }
 
-  getMeals(mealId?: number): Observable<Meal[]> {
+  getMeals(): Observable<Meal[]> {
 
-    return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}/${mealId}`).pipe(
+    return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
       map((apiResult: ApiResult) => apiResult.data),
       map((meals: Meal[]) => meals)
 

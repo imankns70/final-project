@@ -22,7 +22,7 @@ export class ListItemComponent implements OnInit {
 
   }
   getRoute() {
-    return [`../meals`, this.item.id];
+    return ['../meals', this.item.id];
   }
   removeItem() {
 

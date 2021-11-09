@@ -1,27 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { ApiResult } from 'src/app/api-result';
 import { Meal } from 'src/app/models/Meal';
+import { Store } from 'src/app/store';
 import { MealsService } from '../../../../shared/services/meals/meals.service'
 @Component({
   selector: 'app-Meal',
   templateUrl: './Meal.component.html',
   styleUrls: ['./Meal.component.scss']
 })
-export class MealComponent implements OnInit {
-
+export class MealComponent implements OnInit, OnDestroy {
+  meal$: Observable<Meal>;
   subscription = new Subscription();
   constructor(
-    private mailService: MealsService,
-    private router: Router
+    private store: Store,
+    private mealsService: MealsService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.subscription= this.mealsService.getMeals().subscribe((meals: Meal[]) => {
+
+      this.store.set('meals', meals)
+
+    });
+   
+    this.route.params.pipe(
+      switchMap((param: Params) => {
+        return this.mealsService.getMeal(param.id)
+     })
+    )
+  }
+
+  ngOnDestroy() {
+
   }
   addMeal(meal: Meal) {
     this.subscription.add(
-      this.mailService.addMeal(meal).subscribe((apiResult: ApiResult) => {
+      this.mealsService.addMeal(meal).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {
           this.backToMeals();
         }
@@ -31,7 +50,6 @@ export class MealComponent implements OnInit {
 
 
   }
-
   backToMeals() {
     this.router.navigate(['meals'])
   }

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { ApiResult } from 'src/app/api-result';
 import { environment } from 'src/environments/environment';
 import { Meal } from 'src/app/models/Meal';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,19 @@ export class MealsService {
     private authService: AuthService,
   ) { }
 
-  getMeals(): Observable<Meal[]> {
+  getMeal(mealId?: number): Observable<Meal> {
 
-    return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
+    return this.store.select<Meal[]>('meals').pipe(
+      filter(Boolean),
+      map((meals: Meal[]) => meals.find(meal => meal.id == mealId))
+    )
+
+    
+  }
+
+  getMeals(mealId?: number): Observable<Meal[]> {
+
+    return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}/${mealId}`).pipe(
       map((apiResult: ApiResult) => apiResult.data),
       map((meals: Meal[]) => meals)
 

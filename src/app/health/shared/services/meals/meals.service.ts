@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../../../../auth/shared/services/auth/auth.service';
 import { Store } from 'src/app/store';
-import { Observable, of } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { ApiResult } from 'src/app/api-result';
 import { environment } from 'src/environments/environment';
 import { Meal } from 'src/app/models/Meal';
-import { filter, map, tap } from 'rxjs/operators';
+import { map, takeWhile, tap } from 'rxjs/operators';
+import { Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,21 +20,15 @@ export class MealsService {
     private authService: AuthService,
   ) { }
 
-  // getMeal(mealId: number): Observable<Meal> {
-  //  debugger
-  //   return this.store.select<Meal[]>('meals').pipe(
-  //     filter(Boolean),
-  //     tap(meal=>{
-  //       debugger
-  //       console.log(meal)
-  //     } ),
-      
-  //     map((meals: Meal[]) => meals.find(meal => meal.id ==  mealId))
-   
-  //   )
+  getMeal(meals: Observable<Meal[]>,params: Observable<Params>): Observable<Meal> {
 
-    
-  // }
+    return combineLatest([meals, params]).pipe(
+      takeWhile(([meals, params]) => !!params.id),
+      map(([meals, param]) => meals.find(meal => meal.id === parseInt(param.id, 10))
+      ))
+
+
+  }
 
   getMeals(): Observable<Meal[]> {
 

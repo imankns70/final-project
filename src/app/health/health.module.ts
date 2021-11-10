@@ -9,7 +9,8 @@ const ROUTES: Routes = [
 
     {
         path: 'meals',
-        canLoad:[AuthGuard],        
+        canLoad:[AuthGuard], 
+               
         loadChildren: () => import('./meals/meals.module').then(m => m.MealsModule)
     },
 

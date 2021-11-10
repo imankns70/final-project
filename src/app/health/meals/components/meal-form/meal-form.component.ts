@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import {
   FormGroup, FormArray,
   FormBuilder, FormControl,
@@ -13,6 +13,9 @@ import { Meal } from 'src/app/models/Meal';
 })
 export class MealFormComponent implements OnInit {
 
+  @Input()
+  meal:Meal;
+  
   @Output()
   create: EventEmitter<any> = new EventEmitter<any>()
   form = this.fb.group({

@@ -18,6 +18,7 @@ import { ListItemComponent } from './components/list-item/list-item/list-item.co
     declarations: [
         ListItemComponent
     ],
+    
     exports: [ListItemComponent]
 })
 

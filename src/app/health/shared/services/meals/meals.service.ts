@@ -6,7 +6,7 @@ import { combineLatest, empty, Observable, of } from 'rxjs';
 import { ApiResult } from 'src/app/api-result';
 import { environment } from 'src/environments/environment';
 import { Meal } from 'src/app/models/Meal';
-import { map, takeWhile, tap } from 'rxjs/operators';
+import { map, takeWhile } from 'rxjs/operators';
 import { Params } from '@angular/router';
 
 @Injectable({

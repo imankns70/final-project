@@ -1,6 +1,6 @@
 export interface  Meal{
     id:number,
     name:string,
-    ingredient:string[],
+    ingredients:string[],
     userId:number
 }

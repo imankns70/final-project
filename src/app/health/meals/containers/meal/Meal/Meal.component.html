@@ -2,9 +2,7 @@
     <div class="meal__title">
         <h1>
             <img src="/assets/img/food.svg">
-            <!-- <p>
-                {{(meal$ | async) | json}}
-            </p> -->
+
             <ng-container *ngIf="(meal$ | async) as meal; then edit ; else create;">
 
             </ng-container>
@@ -18,16 +16,22 @@
             </ng-template>
         </h1>
     </div>
-    <div *ngIf="meal$ | async as meal; else loading">
-        <meal-form
-        [meal]="meal"
-        (create)="addMeal($event)">
+    
+    <div>
+        <meal-form [meal]="(meal$ | async)"
+         (create)="addMeal($event)"
+         (update)="updateMeal($event)"
+         (remove)="removeMeal($event)"
+         >
         </meal-form>
     </div>
+
+<!-- 
     <ng-template #loading>
+      
         <div class="message">
             <img src="/assets/img/loading.svg">
-              Fetching meal ...
+            Fetching meal ...
         </div>
-    </ng-template>
+    </ng-template> -->
 </div>

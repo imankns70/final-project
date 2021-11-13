@@ -23,12 +23,29 @@ export class MealComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.meal$ = this.mealsService.getMeal(this.store.select<Meal[]>('meals'), this.route.params)
-      .pipe(
-        //filter(Boolean),
-        map((meal: Meal) => meal)
 
-      );
+     //method one
+
+    this.meal$ = this.mealsService.getMeal(this.store.select<Meal[]>('meals'), this.route.params)
+
+    //method two
+    // if (this.route.snapshot.params.id) {
+    //   const mealId = this.route.snapshot.params.id;
+    //   this.meal$ = this.store.select<Meal[]>('meals').pipe(
+    //     map((meals: Meal[]) => {
+    //       debugger
+    //       if (meals) {
+    //         return meals.find(meal => meal.id = mealId)
+    //       }
+    //     })
+    //   )
+    // }
+    //this.meal$ = this.mealsService.getMeal(this.store.select<Meal[]>('meals'), this.route.params)
+    // .pipe(
+    //   filter(Boolean),
+    //   map((meal: Meal) => meal)
+
+    // );
 
     this.subscription.add(this.route.params.pipe(
       takeWhile((param: Params) => !!param.id),
@@ -42,17 +59,42 @@ export class MealComponent implements OnInit, OnDestroy {
     }));
 
 
-
-
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe()
 
   }
+
   addMeal(meal: Meal) {
     this.subscription.add(
       this.mealsService.addMeal(meal).subscribe((apiResult: ApiResult) => {
+        if (apiResult.isSuccess) {
+          this.backToMeals();
+        }
+      })
+
+    )
+
+
+  }
+  updateMeal(meal: Meal) {
+    console.log('update::', meal);
+    this.subscription.add(
+      this.mealsService.updateMeal(meal).subscribe((apiResult: ApiResult) => {
+        if (apiResult.isSuccess) {
+          this.backToMeals();
+        }
+      })
+
+    )
+
+
+  }
+  removeMeal(meal: Meal) {
+    console.log('remove::', meal);
+    this.subscription.add(
+      this.mealsService.removeMeal(meal).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {
           this.backToMeals();
         }

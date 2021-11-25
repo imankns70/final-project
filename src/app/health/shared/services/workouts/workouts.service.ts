@@ -20,7 +20,7 @@ export class WorkoutsService {
     private authService: AuthService,
   ) { }
 
-  getworkout(workouts: Observable<Workout[]>, params: Observable<Params>): Observable<Workout> {
+  getWorkout(workouts: Observable<Workout[]>, params: Observable<Params>): Observable<Workout> {
 
     return combineLatest([workouts, params]).pipe(
 
@@ -28,12 +28,19 @@ export class WorkoutsService {
       map(([workouts, param]) => {
         if (workouts) {
           return workouts.find(workouts => workouts.id === parseInt(param.id, 10))
-        }
+        } 
       }
       ))
 
   }
+  getWorkouts(): Observable<Workout[]> {
 
+    return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
+      map((apiResult: ApiResult) => apiResult.data),
+      map((workouts: Workout[]) => workouts)
+
+    )
+  }
  
   get userId() {
     return this.authService.getUserLoggein().id

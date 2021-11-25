@@ -1,23 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { combineLatest, empty, observable, Observable, of, Subscription } from 'rxjs';
-import { filter, map, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { filter, map, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { ApiResult } from 'src/app/api-result';
-import { Meal } from 'src/app/models/Meal';
+import { Workout } from 'src/app/models/workout';
 import { Store } from 'src/app/store';
-import { MealsService } from '../../../../shared/services/meals/meals.service'
+import { WorkoutsService } from '../../../shared/services/workouts/workouts.service'
 @Component({
-  selector: 'app-Meal',
-  templateUrl: './Meal.component.html',
-  styleUrls: ['./Meal.component.scss']
+  selector: 'Workout',
+  templateUrl: './Workout.component.html',
+  styleUrls: ['./Workout.component.scss']
 })
-export class MealComponent implements OnInit, OnDestroy {
+export class WorkoutComponent implements OnInit, OnDestroy {
   counter: number;
-  meal$: Observable<Meal>;
+  workout$: Observable<Workout>;
   subscription = new Subscription();
   constructor(
     private store: Store,
-    private mealsService: MealsService,
+    private workoutsService: WorkoutsService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -26,7 +26,7 @@ export class MealComponent implements OnInit, OnDestroy {
 
      //method one
 
-    this.meal$ = this.mealsService.getMeal(this.store.select<Meal[]>('meals'), this.route.params)
+    this.workout$ = this.workoutsService.getWorkout(this.store.select<Workout[]>('workouts'), this.route.params)
  
     //method two
     // if (this.route.snapshot.params.id) {
@@ -50,12 +50,12 @@ export class MealComponent implements OnInit, OnDestroy {
     this.subscription.add(this.route.params.pipe(
       takeWhile((param: Params) => !!param.id),
       switchMap(() => {
-        return this.mealsService.getMeals()
+        return this.workoutsService.getWorkouts()
       }
       )
-    ).subscribe((meals: Meal[]) => {
+    ).subscribe((workouts: Workout[]) => {
 
-      this.store.set('meals', meals)
+      this.store.set('workouts', workouts)
     }));
 
 
@@ -66,11 +66,11 @@ export class MealComponent implements OnInit, OnDestroy {
 
   }
 
-  addMeal(meal: Meal) {
+  addWorkout(workout: Workout) {
     this.subscription.add(
-      this.mealsService.addMeal(meal).subscribe((apiResult: ApiResult) => {
+      this.workoutsService.addWorkout(workout).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {
-          this.backToMeals();
+          this.backToWorkouts();
         }
       })
 
@@ -78,12 +78,12 @@ export class MealComponent implements OnInit, OnDestroy {
 
 
   }
-  updateMeal(meal: Meal) {
-    console.log('update::', meal);
+  updateWorkout(workout: Workout) {
+    console.log('update::', workout);
     this.subscription.add(
-      this.mealsService.updateMeal(meal).subscribe((apiResult: ApiResult) => {
+      this.workoutsService.updateWorkout(workout).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {
-          this.backToMeals();
+          this.backToWorkouts();
         }
       })
 
@@ -91,12 +91,12 @@ export class MealComponent implements OnInit, OnDestroy {
 
 
   }
-  removeMeal(meal: Meal) {
-    console.log('remove::', meal);
+  removeWorkout(workout: Workout) {
+    console.log('remove::', workout);
     this.subscription.add(
-      this.mealsService.removeMeal(meal).subscribe((apiResult: ApiResult) => {
+      this.workoutsService.removeWorkout(workout).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {
-          this.backToMeals();
+          this.backToWorkouts();
         }
       })
 
@@ -104,7 +104,7 @@ export class MealComponent implements OnInit, OnDestroy {
 
 
   }
-  backToMeals() {
-    this.router.navigate(['meals'])
+  backToWorkouts() {
+    this.router.navigate(['workouts'])
   }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Meal } from 'src/app/models/Meal';
+ 
 
 @Component({
   selector: 'list-item',

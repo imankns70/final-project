@@ -26,35 +26,36 @@ export class WorkoutFormComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    type:'strength'
+    type: 'strength',
+    strength: this.fb.group({
+      reps: 0,
+      sets: 0,
+      weight: 0,
+    }),
+    endurance: this.fb.group({
+      distance: 0,
+      duration: 0
+    }),
+
   });
-  
+
   constructor(
     private fb: FormBuilder
-  ) {}
+  ) { }
 
+  get placeholder() {
+    return `e.g ${this.form.get('type').value === 'strength' ? 'Benchpress' : 'Tredmill'}`
+  }
   ngOnChanges(changes: SimpleChanges) {
-    // if (this.meal && this.meal.name) {
-    //   this.exists = true;
-    //   this.emptyIngredients();
+    if (this.workout && this.workout.name) {
+      this.exists = true;
+      const value = this.workout;
+      this.form.patchValue(value); 
 
-    //   const value = this.meal;
-    //   this.form.patchValue(value);
-
-    //   if (value.ingredients) {
-    //     for (const item of value.ingredients) {
-    //       this.ingredients.push(new FormControl(item));
-    //     }
-    //   }
-
-    // }
+    }
   }
 
-  // emptyIngredients() {
-  //   while(this.ingredients.controls.length) {
-  //     this.ingredients.removeAt(0);
-  //   }
-  // }
+   
 
   get required() {
     return (
@@ -62,18 +63,7 @@ export class WorkoutFormComponent {
       this.form.get('name').touched
     );
   }
-
-  // get ingredients() {
-  //   return this.form.get('ingredients') as FormArray;
-  // }
-
-  // addIngredient() {
-  //   this.ingredients.push(new FormControl(''));
-  // }
-
-  // removeIngredient(index: number) {
-  //   this.ingredients.removeAt(index);
-  // }
+    
 
   createWorkout() {
     if (this.form.valid) {

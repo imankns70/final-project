@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
- 
+
 
 @Component({
   selector: 'list-item',
@@ -22,7 +22,9 @@ export class ListItemComponent implements OnInit {
 
   }
   getRoute() {
-    return ['../meals', this.item.id];
+    return [
+      `../${this.item.ingredients ? 'meals' : 'workouts'}`, 
+      this.item.id];
   }
   removeItem() {
 

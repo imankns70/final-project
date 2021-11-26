@@ -67,6 +67,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
   }
 
   addWorkout(workout: Workout) {
+    //console.log('workout:::::::',workout)
     this.subscription.add(
       this.workoutsService.addWorkout(workout).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {

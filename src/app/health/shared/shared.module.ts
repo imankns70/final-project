@@ -7,6 +7,8 @@ import { MealsService } from './services/meals/meals.service';
 import { WorkoutsService } from './services/workouts/workouts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ListItemComponent } from './components/list-item/list-item/list-item.component';
+import { JoinPipe } from './pipes/join.pipe';
+import { WorkoutPipe } from './pipes/workout.pipe';
 
 @NgModule({
 
@@ -16,10 +18,16 @@ import { ListItemComponent } from './components/list-item/list-item/list-item.co
         RouterModule,
     ],
     declarations: [
-        ListItemComponent
+        ListItemComponent,
+        JoinPipe,
+        WorkoutPipe
     ],
     
-    exports: [ListItemComponent]
+    exports: [
+        ListItemComponent,
+        JoinPipe,
+        WorkoutPipe
+    ]
 })
 
 

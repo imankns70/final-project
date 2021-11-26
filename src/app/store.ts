@@ -8,6 +8,7 @@ import { Workout } from './models/workout';
 export interface State {
   user: User,
   meals: Meal[],
+  date:Date
   workouts: Workout[],
   [key: string]: any
 }
@@ -15,6 +16,7 @@ export interface State {
 const state: State = {
   user: undefined,
   meals: undefined,
+  date: undefined,
   workouts: undefined
 };
 
@@ -28,15 +30,16 @@ export class Store {
   }
 
   select<T>(name: string): Observable<T> {
-
+    debugger
     return this.store.pipe(
    pluck(name));
   }
 
   set(name: string, state: any) {
-   
+    debugger
     this.subject.next({ ...this.value, [name]: state });
   }
    
 
 }
+ 

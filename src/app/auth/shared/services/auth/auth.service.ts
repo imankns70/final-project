@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { ApiResult } from 'src/app/api-result';
 import { User } from 'src/app/models/user';
 
-import { Store } from 'src/app/store';
+import { Store } from 'store';
 
 const userKey: string = 'userLoggedin';
 @Injectable({

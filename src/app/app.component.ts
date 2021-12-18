@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from './store';
+import { Store } from '../store';
 import { Observable } from 'rxjs';
 import { User } from './models/user';
 import { AuthService } from './auth/shared/services/auth/auth.service';
@@ -25,6 +25,11 @@ export class AppComponent implements OnInit {
     if (userLoggedin) {
       this.store.set('user', userLoggedin)
     }
+    
+      
+
+     
+  
   }
   onLogout() {
    this.authService.logOut();

@@ -10,7 +10,7 @@ import {HealthModule} from './health/health.module';
 import {HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './error-interceptor';
 
-import { Store } from './store';
+import { Store } from '../store';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 

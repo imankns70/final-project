@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../../../../auth/shared/services/auth/auth.service';
-import { Store } from 'src/app/store';
+import { Store } from 'store';
 import { combineLatest, empty, Observable, of } from 'rxjs';
 import { ApiResult } from 'src/app/api-result';
 import { environment } from 'src/environments/environment';
-import { Meal } from 'src/app/models/Meal';
-import { map, takeWhile } from 'rxjs/operators';
+import { Meal } from 'src/app/models/meal';
+import { map, takeWhile, tap } from 'rxjs/operators';
 import { Params } from '@angular/router';
 
 @Injectable({
@@ -38,7 +38,8 @@ export class MealsService {
 
     return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
       map((apiResult: ApiResult) => apiResult.data),
-      map((meals: Meal[]) => meals)
+      map((meals: Meal[]) => meals),
+   
 
     )
   }

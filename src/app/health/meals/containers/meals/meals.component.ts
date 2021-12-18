@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from 'src/app/store';
+import { Store } from 'store';
 import { Observable, Subscription } from 'rxjs';
 import { MealsService } from '../../../shared/services/meals/meals.service';
-import { Meal } from 'src/app/models/Meal';
+import { Meal } from 'src/app/models/meal';
 @Component({
   selector: 'app-meals',
   templateUrl: './meals.component.html',

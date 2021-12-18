@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 
-import { Store } from '../../store';
+import { Store } from '../../../store';
 import { MealsComponent } from './containers/meals/meals.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';

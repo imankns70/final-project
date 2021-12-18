@@ -4,7 +4,7 @@ import {
   FormBuilder, FormControl,
   Validators
 } from '@angular/forms';
-import { Meal } from 'src/app/models/Meal';
+import { Meal } from 'src/app/models/meal';
 @Component({
   selector: 'meal-form',
   templateUrl: './meal-form.component.html',
@@ -29,6 +29,7 @@ export class MealFormComponent implements OnInit, OnChanges {
 
 
   form = this.fb.group({
+    section: [''],
     name: ['', Validators.required],
     ingredients: this.fb.array([''])
   })

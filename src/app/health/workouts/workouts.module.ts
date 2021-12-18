@@ -9,7 +9,7 @@ import { WorkoutFormComponent } from './components/workout-form/workout-form.com
 import { WorkoutTypeComponent } from './components/work-type/workout-type.component';
 
 import { SharedModule } from '../shared/shared.module';
-import { Store } from '../../store';
+import { Store } from 'store';
 const ROUTES: Routes = [
   { path: '', component: WorkoutsComponent },
   { path: 'new', component: WorkoutComponent },

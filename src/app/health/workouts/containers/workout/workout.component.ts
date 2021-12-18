@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { ApiResult } from 'src/app/api-result';
 import { Workout } from 'src/app/models/workout';
-import { Store } from 'src/app/store';
+import { Store } from 'store';
 import { WorkoutsService } from '../../../shared/services/workouts/workouts.service'
 @Component({
   selector: 'Workout',
@@ -67,7 +67,8 @@ export class WorkoutComponent implements OnInit, OnDestroy {
   }
 
   addWorkout(workout: Workout) {
-    //console.log('workout:::::::',workout)
+
+    
     this.subscription.add(
       this.workoutsService.addWorkout(workout).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListItemComponent } from './components/list-item/list-item/list-item.component';
 import { JoinPipe } from './pipes/join.pipe';
 import { WorkoutPipe } from './pipes/workout.pipe';
+ 
 
 @NgModule({
 
@@ -23,7 +24,7 @@ import { WorkoutPipe } from './pipes/workout.pipe';
         JoinPipe,
         WorkoutPipe
     ],
-    
+
     exports: [
         ListItemComponent,
         JoinPipe,
@@ -40,6 +41,7 @@ export class SharedModule {
                 MealsService,
                 WorkoutsService,
                 ScheduleService
+            
 
             ]
         }

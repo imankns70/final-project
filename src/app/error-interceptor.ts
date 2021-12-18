@@ -15,8 +15,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       tap((event: any) => {
        
         if (event instanceof HttpResponse) {
-
-          console.log('success');
+     
 
         }
        

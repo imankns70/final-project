@@ -3,8 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { combineLatest, empty, observable, Observable, of, Subscription } from 'rxjs';
 import { filter, map, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { ApiResult } from 'src/app/api-result';
-import { Meal } from 'src/app/models/Meal';
-import { Store } from 'src/app/store';
+import { Meal } from 'src/app/models/meal';
+import { Store } from 'store';
 import { MealsService } from '../../../../shared/services/meals/meals.service'
 @Component({
   selector: 'app-Meal',

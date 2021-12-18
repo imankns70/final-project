@@ -3,15 +3,17 @@ export interface Workout {
     name:string,
     type:string,
     strength:Strength,
-    endurance:Endurance
+    endurance:Endurance,
+    $key: string
+    $exist: () => boolean
 }
-interface Strength{
+export interface Strength{
     Reps:number,
     Sets:number,
     Weight:number,
 }
  
-interface Endurance{
+export interface Endurance{
     Distance:number,
     Duration:number,
    

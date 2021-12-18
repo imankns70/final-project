@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { WorkoutsService } from 'src/app/health/shared/services/workouts/workouts.service';
 import { Workout } from 'src/app/models/workout';
-import { Store } from 'src/app/store';
+import { Store } from 'store';
 
 @Component({
   selector: 'workouts',
@@ -23,11 +23,9 @@ export class WorkoutsComponent implements OnInit {
 
     this.workouts$ = this.store.select<Workout[]>('workouts');
 
-    this.subscription = this.workoutsService.getWorkouts().subscribe((workouts: Workout[]) => {
-   
-      this.store.set('workouts', workouts)
-
-    })
+    this.subscription = this.workoutsService.getWorkouts().subscribe(
+      (workouts: Workout[])=> this.store.set('workouts', workouts)
+    )
 
   }
 

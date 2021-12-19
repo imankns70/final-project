@@ -22,7 +22,7 @@ export class MealsComponent implements OnInit, OnDestroy {
     this.meals$ = this.store.select<Meal[]>('meals');
 
     this.subscription = this.mealsService.getMeals().subscribe((meals: Meal[]) => {
-   
+      debugger
       this.store.set('meals', meals)
 
     })

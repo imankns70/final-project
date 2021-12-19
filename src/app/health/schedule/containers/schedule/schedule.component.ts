@@ -44,7 +44,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       ),
 
       this.mealsService.getMeals().subscribe((meals: Meal[]) => {
-
+        debugger
         this.store.set('meals', meals)
 
       }),
@@ -54,11 +54,12 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
       }),
       this.scheduleService.list$.subscribe((selected: any) => {
-
+debugger
         const list = this.store.value[selected.type]
         this.store.set('list', list)
       }),
       this.scheduleService.items$.subscribe((items: ScheduelItem[]) => {
+        debugger
         this.store.set('shcedule', items);
       })
     ]
@@ -71,6 +72,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   changeSection(event: any) {
+    debugger
     this.open = true;
     this.scheduleService.selectSection(event);
   }
@@ -79,8 +81,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.scheduleService.updateDate(date);
   }
   assignItem(items: string[]) {
+ 
     this.scheduleService.updateItems(items)
-    this.store.set('schedule', items)
+    // this.store.set('schedule', items)
     this.closeAssign()
   }
   closeAssign() {

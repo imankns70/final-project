@@ -77,7 +77,7 @@ export class Store {
   }
 
   select<T>(name: string): Observable<T> {
-
+ 
     return this.store.pipe(
       pluck(name));
   }

@@ -23,12 +23,12 @@ export class ScheduleService {
     withLatestFrom(this.section$),
     map(([items, section]: any[]) => {
       // make an http Request
-
+      debugger
       return {
         userId: this.userId,
         type: section.type,
         day: section.day,
-        assigned: items,
+        assigned: section.type === "workouts" ? items.workouts : items.meals,
         section: section.sectionKey
 
       }

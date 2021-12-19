@@ -38,8 +38,8 @@ export class ScheduleCalenderComponent implements OnInit, OnChanges {
 
   constructor() { }
   ngOnChanges() {
- 
- 
+
+
     this.selectedDayIndex = this.getToday(this.selectedDay);
     this.selectedWeek = this.getStartOfWeek(new Date(this.selectedDay))
 
@@ -48,7 +48,7 @@ export class ScheduleCalenderComponent implements OnInit, OnChanges {
 
   }
   selectSection({ type, assigned, data }: any, sectionKey) {
-    const day = this.selectedDay;   
+    const day = this.selectedDay;
     this.select.emit({
       type,
       assigned,
@@ -58,7 +58,7 @@ export class ScheduleCalenderComponent implements OnInit, OnChanges {
     })
   }
   getSection(name: string): ScheduelItem {
-    return this.items.find(item => item.section == name);
+    return this.items?.find(item => item.section == name);
 
   }
   onChange(weekOffset: number) {

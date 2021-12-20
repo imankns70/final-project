@@ -29,7 +29,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.date$ = this.store.select('date');
-    this.schedule$ = this.store.select('schedule');
+    this.schedule$ = this.store.select<ScheduelItem[]>('schedule');
     this.selected$ = this.store.select('selected');
     this.list$ = this.store.select('list');
 
@@ -44,7 +44,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       ),
 
       this.mealsService.getMeals().subscribe((meals: Meal[]) => {
-        debugger
+
         this.store.set('meals', meals)
 
       }),
@@ -54,13 +54,13 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
       }),
       this.scheduleService.list$.subscribe((selected: any) => {
-debugger
+
         const list = this.store.value[selected.type]
         this.store.set('list', list)
       }),
       this.scheduleService.items$.subscribe((items: ScheduelItem[]) => {
         debugger
-        this.store.set('shcedule', items);
+         this.store.set('schedule', items);
       })
     ]
 
@@ -72,7 +72,7 @@ debugger
   }
 
   changeSection(event: any) {
-    debugger
+
     this.open = true;
     this.scheduleService.selectSection(event);
   }
@@ -81,9 +81,9 @@ debugger
     this.scheduleService.updateDate(date);
   }
   assignItem(items: string[]) {
- 
+   
     this.scheduleService.updateItems(items)
-    // this.store.set('schedule', items)
+
     this.closeAssign()
   }
   closeAssign() {

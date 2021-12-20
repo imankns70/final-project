@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
 import { ScheduelItem } from 'src/app/models/schedule-item';
 
 @Component({
@@ -37,8 +37,8 @@ export class ScheduleCalenderComponent implements OnInit, OnChanges {
   select = new EventEmitter<any>()
 
   constructor() { }
-  ngOnChanges() {
-
+  ngOnChanges(changes:SimpleChanges) {
+ 
 
     this.selectedDayIndex = this.getToday(this.selectedDay);
     this.selectedWeek = this.getStartOfWeek(new Date(this.selectedDay))
@@ -58,6 +58,7 @@ export class ScheduleCalenderComponent implements OnInit, OnChanges {
     })
   }
   getSection(name: string): ScheduelItem {
+ 
     return this.items?.find(item => item.section == name);
 
   }

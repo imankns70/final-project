@@ -23,7 +23,7 @@ export class ScheduleService {
     withLatestFrom(this.section$),
     map(([items, section]: any[]) => {
       // make an http Request
-      debugger
+
       return {
         userId: this.userId,
         type: section.type,
@@ -78,12 +78,13 @@ export class ScheduleService {
     )
   }
   updateItems(items: string[]) {
-    this.itemList$.next(items);
+    return this.itemList$.next(items);
   }
   setSchedule(viewModel: any) {
     return this.http.post<ApiResult>(`${this.baseUrl}`, viewModel).pipe(
       map((apiResult: ApiResult) => apiResult.data),
-      map((items: ScheduelItem[]) => items)
+      map((items: ScheduelItem[]) =>  items),
+      //tap((items: ScheduelItem[]) =>  this.store.set('shcedule', items))
     )
   }
   get userId() {

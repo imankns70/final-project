@@ -12,8 +12,7 @@ counter:number=1;
   days: string[] = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
   @Input()
   set selected (selected: number){
-    console.log('ScheduleDaysComponent',this.counter);
-    this.counter++;
+   
    this._selected=selected
   }
 

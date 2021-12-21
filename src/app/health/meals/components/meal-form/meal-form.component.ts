@@ -29,7 +29,6 @@ export class MealFormComponent implements OnInit, OnChanges {
 
 
   form = this.fb.group({
-    section: [''],
     name: ['', Validators.required],
     ingredients: this.fb.array([''])
   })

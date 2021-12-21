@@ -3,13 +3,13 @@
     <h1>
       <img src="/assets/img/workout.svg">
     
-      <!-- <span *ngIf="workout$ | async as workout; else title;">
+      <span *ngIf="workout$ | async as workout; else title;">
         {{ workout.name ? 'Edit' : 'Create' }} workout
       </span>
       <ng-template #title>
         Loading...
-      </ng-template> -->
-      <ng-container *ngIf="(workout$ | async) as meal; then edit ; else create;">
+      </ng-template>
+      <!-- <ng-container *ngIf="(workout$ | async) as meal; then edit ; else create;">
 
       </ng-container>
 
@@ -19,7 +19,7 @@
 
       <ng-template #edit>
           Edit workout
-      </ng-template>
+      </ng-template> -->
     </h1>
   </div>
   

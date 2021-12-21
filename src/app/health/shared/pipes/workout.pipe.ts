@@ -7,7 +7,7 @@ export class WorkoutPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     
-    if (value.type == "Endurance") {
+    if (value.type == "endurance") {
   
       return `
        Distance:${value.endurance.distance + 'km'},

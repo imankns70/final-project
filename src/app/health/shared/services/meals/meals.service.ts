@@ -36,7 +36,7 @@ export class MealsService {
 
   getMeals(): Observable<Meal[]> {
 
-    return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
+    return this.http.get<ApiResult>(`${this.baseUrl}`).pipe(
       map((apiResult: ApiResult) => apiResult.data),
       map((meals: Meal[]) => meals),
    
@@ -47,7 +47,7 @@ export class MealsService {
     return this.authService.getUserLoggein().id
   }
   addMeal(meal: Meal): Observable<ApiResult> {
-    const viewModel = { ...meal, userId: this.userId };
+    const viewModel = meal;
     return this.http.post<ApiResult>(`${this.baseUrl}`, viewModel)
 
   }

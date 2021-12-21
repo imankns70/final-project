@@ -22,6 +22,7 @@ export class ListItemComponent implements OnInit {
 
   }
   getRoute() {
+     
     return [
       `../${this.item.ingredients ? 'meals' : 'workouts'}`, 
       this.item.id];

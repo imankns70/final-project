@@ -25,6 +25,7 @@ export class WorkoutFormComponent {
   remove = new EventEmitter<Workout>();
 
   form = this.fb.group({
+    id:0,
     name: ['', Validators.required],
     type: 'strength',
     strength: this.fb.group({
@@ -47,6 +48,7 @@ export class WorkoutFormComponent {
     return `e.g ${this.form.get('type').value === 'strength' ? 'Benchpress' : 'Tredmill'}`
   }
   ngOnChanges(changes: SimpleChanges) {
+    debugger
     if (this.workout && this.workout.name) {
       this.exists = true;
       const value = this.workout;
@@ -72,6 +74,7 @@ export class WorkoutFormComponent {
   }
 
   updateWorkout() {
+    debugger
     if (this.form.valid) {
       this.update.emit(this.form.value);
     }

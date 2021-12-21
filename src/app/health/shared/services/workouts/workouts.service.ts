@@ -35,7 +35,7 @@ export class WorkoutsService {
   }
   getWorkouts(): Observable<Workout[]> {
 
-    return this.http.get<ApiResult>(`${this.baseUrl}/${this.userId}`).pipe(
+    return this.http.get<ApiResult>(`${this.baseUrl}/GetAllWorkouts`).pipe(
       map((apiResult: ApiResult) => apiResult.data),
       map((workouts: Workout[]) => workouts),
       //tap((workouts: Workout[])=> this.store.set('workouts', workouts))
@@ -52,7 +52,7 @@ export class WorkoutsService {
     return this.http.post<ApiResult>(`${this.baseUrl}`, viewModel)
 
   }
-  updateWorkout(workout: Workout): Observable < ApiResult > {
+  updateWorkout(workout: Workout): Observable <ApiResult> {
     console.log(workout);
     const viewModel = { ...workout, userId: this.userId };
     return this.http.put<ApiResult>(`${this.baseUrl}`, viewModel)

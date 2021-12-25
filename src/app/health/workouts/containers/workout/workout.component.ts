@@ -24,9 +24,8 @@ export class WorkoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-     //method one
-
-    this.workout$ = this.workoutsService.getWorkout(this.store.select<Workout[]>('workouts'), this.route.params)
+    //method one
+    this.workout$ = this.workoutsService.getWorkout(this.store.select<Workout[]>('workout'), this.route.params)
  
     //method two
     // if (this.route.snapshot.params.id) {
@@ -68,7 +67,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
 
   addWorkout(workout: Workout) {
 
-    
+
     this.subscription.add(
       this.workoutsService.addWorkout(workout).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {
@@ -81,7 +80,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
 
   }
   updateWorkout(workout: Workout) {
- 
+
     this.subscription.add(
       this.workoutsService.updateWorkout(workout).subscribe((apiResult: ApiResult) => {
         if (apiResult.isSuccess) {

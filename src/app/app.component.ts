@@ -26,9 +26,6 @@ export class AppComponent implements OnInit {
       this.store.set('user', userLoggedin)
     }
     
-      
-
-     
   
   }
   onLogout() {

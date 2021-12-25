@@ -6,7 +6,7 @@ import { combineLatest, empty, Observable, of } from 'rxjs';
 import { ApiResult } from 'src/app/api-result';
 import { environment } from 'src/environments/environment';
 import { Workout } from 'src/app/models/workout';
-import { map, takeWhile, tap } from 'rxjs/operators';
+import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { Params } from '@angular/router';
 
 @Injectable({
@@ -28,11 +28,28 @@ export class WorkoutsService {
       map(([workouts, param]) => {
         if (workouts) {
           return workouts.find(workouts => workouts.id === parseInt(param.id, 10))
-        } 
+        }
       }
       ))
 
   }
+  // getWorkout(params: Observable<Params>): Observable<Workout> {
+
+  //   return params.pipe(
+
+  //     switchMap((value: Params, index: number) => {
+  //       return this.http.get<ApiResult>(`${this.baseUrl}/${value.id}`)
+  //     }),
+  //     map((apiResult: ApiResult) => {
+  //       if (apiResult.isSuccess) {
+  //         return apiResult.data
+  //       }
+  //     }
+  //     ),
+  //     map((workout: Workout) => workout)
+  //   )
+
+  // }
   getWorkouts(): Observable<Workout[]> {
 
     return this.http.get<ApiResult>(`${this.baseUrl}/GetAllWorkouts`).pipe(
@@ -42,21 +59,21 @@ export class WorkoutsService {
 
     )
   }
- 
+
   get userId() {
     return this.authService.getUserLoggein().id
   }
   addWorkout(workout: Workout): Observable<ApiResult> {
-  
+
     const viewModel = { ...workout, userId: this.userId };
     return this.http.post<ApiResult>(`${this.baseUrl}`, viewModel)
 
   }
-  updateWorkout(workout: Workout): Observable <ApiResult> {
+  updateWorkout(workout: Workout): Observable<ApiResult> {
     console.log(workout);
     const viewModel = { ...workout, userId: this.userId };
     return this.http.put<ApiResult>(`${this.baseUrl}`, viewModel)
-  
+
   }
   removeWorkout(workout: Workout) {
     return this.http.delete<ApiResult>(`${this.baseUrl}/${workout.id}`)
